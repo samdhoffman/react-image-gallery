@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
 import axios from 'axios';
+import Grid from '@material-ui/core/Grid';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -31,13 +32,13 @@ function App() {
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
-        <ul>
+        <Grid container spacing={2}>
           {images.map(img => (
-            <li key={img.url}>
+            <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={img.url}>
               <a href={img.url}>{img.img_id}</a>
-            </li>
+            </Grid>
           ))}
-        </ul>
+        </Grid>
       )}
     </div>
   );
