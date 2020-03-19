@@ -14,6 +14,11 @@ const useStyles = makeStyles({
   },
   title: {
     flexGrow: 1
+  },
+  githubLink: {
+    '&:visited': {
+      color: 'inherit',
+    }
   }
 })
 
@@ -28,7 +33,9 @@ const Navbar = () => {
             Image Gallery
           </Typography>
           <Button color="inherit">
-            <GitHubIcon/>
+            <a className={classes.githubLink} href="https://github.com/samdhoffman/react-image-gallery" target="_blank">
+              <GitHubIcon/>
+            </a>
           </Button>
         </Toolbar>
       </AppBar>
