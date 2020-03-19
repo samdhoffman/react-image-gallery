@@ -32,10 +32,11 @@ function App() {
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} alignItems="center">
           {images.map(img => (
-            <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={img.url}>
-              <a href={img.url}>{img.img_id}</a>
+            // auto-layout being used for Grid item to make items equitably share available space
+            <Grid item xs key={img.url}> 
+              <img src={img.url}/>
             </Grid>
           ))}
         </Grid>
