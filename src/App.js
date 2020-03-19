@@ -49,7 +49,7 @@ function App() {
           <Grid container spacing={2} alignItems="center">
             {images.map(img => (
               // auto-layout being used for Grid item to make items equitably share available space
-              <Grid item xs key={img.url}> 
+              <Grid container item xs key={img.url} justify="center"> 
                 <img src={img.url} alt=""/>
               </Grid>
             ))}
