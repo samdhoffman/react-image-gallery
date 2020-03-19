@@ -4,19 +4,33 @@ import axios from 'axios';
 
 function App() {
   const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // used for loading indicator
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('/image');
+      setIsLoading(true);
+
+      const result = await axios.get('/image'); // get images data from our api
+
       setImages(result.data);
+      setIsLoading(false);
     };
     fetchData();
-  }, [images]);
+  }, []);
   
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      {isLoading ? (
+        <div>Loading ...</div>
+      ) : (
+        <ul>
+          {images.map(img => (
+            <li key={img.url}>
+              <a href={img.url}>{img.img_id}</a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
