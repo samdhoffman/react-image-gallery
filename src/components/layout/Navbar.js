@@ -7,21 +7,22 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: 'white'
   },
   title: {
     flexGrow: 1
   }
-}))
+})
 
 const Navbar = () => {
   const classes = useStyles();
   
   return (
     <nav className={`Navbar ${classes.root}`}>
-      <AppBar position="static">
+      <AppBar position="static" color="inherit">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Image Gallery
