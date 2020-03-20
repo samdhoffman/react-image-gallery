@@ -1,5 +1,4 @@
 import React from "react"
-import "./Layout.scss";
 import { makeStyles } from '@material-ui/core/styles';
 import Footer from "./Footer";
 import Navbar from "./Navbar";
