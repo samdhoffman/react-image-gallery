@@ -12,7 +12,7 @@ import ImageGrid from './components/ImageGrid';
 const useStyles = makeStyles(theme => ({
   pagination: {
     margin: 20,
-    
+
     "& ul": {
       justifyContent: 'center'
     }
@@ -51,7 +51,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const result = await axios.get(`/image?page=${page}`); // get images data from our api
+      const result = await axios.get(`/images?page=${page}`); // get images data from our api
       setImages(result.data.images);
       setPages(result.data.pages);
     } catch (error) {
@@ -67,7 +67,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const result = await axios.get(`/image/filter?width=${widthOpt}&height=${heightOpt}`); // pass width andheight as query params
+      const result = await axios.get(`/images/filter?width=${widthOpt}&height=${heightOpt}`); // pass width andheight as query params
       setImages(result.data.images);
       setPages(result.data.pages);
     } catch (error) {
