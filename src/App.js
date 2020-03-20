@@ -12,6 +12,7 @@ import InvertColorsIcon from '@material-ui/icons/InvertColors';
 
 import Layout from './components/layout/Layout';
 import { MenuItem } from '@material-ui/core';
+import DimensionDropdown from './components/DimensionDropdown';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -19,12 +20,6 @@ function App() {
   // Pagination
   const [pages, setPages] = useState(0);
   const [curPage, setCurPage] = useState(1);
-
-  // Filtering
-  const [dimensionOpts, setDimensionOpts] = useState({});
-  const [width, setWidth] = useState(300);
-  const [height, setHeight] = useState(200);
-  const [heightOpts, setHeightOpts] = useState([]);
 
   // Grayscale State
   const [isGrayscale, setIsGrayscale] = useState(false);
@@ -37,28 +32,14 @@ function App() {
     fetchData(curPage); // Get images on page load
   }, []);
 
-  useEffect(() => {
-    getDimensionOpts(); // Get both width and height dimensions options for filter dropdowns
-  }, []);
-
   // When user changes page this will set a new current page and make a GET request for the next page of data
   const handlePageChange = (event, value) => {
     setCurPage(value);  
     fetchData(value);
   }
 
-  const handleDimensionChange = (event, dimensionType) => {
-    if (dimensionType == "width") {
-      setWidth(event.target.value)
-      fetchFilteredData(1, event.target.value, height);
-    } else {
-      setHeight(event.target.value);
-      fetchFilteredData(1, width, event.target.value);
-    }
-  }
-
   // Load our image data here using page as a param for pagination
-  const fetchData = async (page, dimensions) => {
+  const fetchData = async (page) => {
     setIsError(false);
     setIsLoading(true);
 
@@ -89,15 +70,6 @@ function App() {
     setIsLoading(false);
   };
 
-  const getDimensionOpts = async () => {
-    try {
-      const result = await axios.get('/dimensions'); // get dimension options from our api
-      setDimensionOpts(result.data)
-    } catch (error) {
-      setIsError(true);
-    }
-  };
-
   const toggleGrayscale = () => {
     let imageDataCopy = [...images];
     
@@ -124,7 +96,7 @@ function App() {
         >
           Toggle Grayscale
         </Button>
-        
+
         {isError && <div>Something went wrong ...</div>}
 
         {isLoading ? (
@@ -141,32 +113,7 @@ function App() {
         )}
 
         <Pagination count={pages} page={curPage} onChange={handlePageChange} />
-        
-        {/* Width Filter Options */}
-        <InputLabel id="width-select-label">Width</InputLabel>
-        <Select
-          labelId="width-select-label"
-          id="width-select"
-          value={width}
-          onChange={e => handleDimensionChange(e, "width")}
-        >
-          {dimensionOpts.widths && dimensionOpts.widths.map(width => (
-            <MenuItem value={width} key={width}>{width}</MenuItem>
-          ))}
-        </Select>
-
-        {/* Height Filter Options */}
-        <InputLabel id="height-select-label">Height</InputLabel>
-        <Select
-          labelId="height-select-label"
-          id="height-select"
-          value={height}
-          onChange={e => handleDimensionChange(e, "height")}
-        >
-          {dimensionOpts.heights && dimensionOpts.heights.map(height => (
-            <MenuItem value={height} key={height}>{height}</MenuItem>
-          ))}
-        </Select>
+        <DimensionDropdown fetchFilteredData={fetchFilteredData} />
 
       </Layout>
     </div>
