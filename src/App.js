@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
 import Pagination from '@material-ui/lab/Pagination';
@@ -8,7 +9,20 @@ import Layout from './components/layout/Layout';
 import ControlPanel from './components/ControlPanel';
 import ImageGrid from './components/ImageGrid';
 
+const useStyles = makeStyles(theme => ({
+  pagination: {
+    margin: 20,
+    
+    "& ul": {
+      justifyContent: 'center'
+    }
+  }
+}));
+
 function App() {
+  const classes = useStyles();
+
+  // Images State set from api
   const [images, setImages] = useState([]);
 
   // Pagination
@@ -89,7 +103,7 @@ function App() {
           <ImageGrid images={images} />
         )}
 
-        <Pagination count={pages} page={curPage} onChange={handlePageChange} />
+        <Pagination className={classes.pagination} count={pages} page={curPage} onChange={handlePageChange} />
       </Layout>
     </div>
   );
