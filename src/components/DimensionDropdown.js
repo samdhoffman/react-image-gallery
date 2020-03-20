@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
     // width: 300
   },
   formControl: {
+    margin: theme.spacing(1),
     minWidth: 120
   },
 }));
@@ -24,8 +25,8 @@ export default function DimensionDropdown({fetchFilteredData}) {
 
   // Filtering
   const [dimensionOpts, setDimensionOpts] = useState({});
-  const [width, setWidth] = useState(null);
-  const [height, setHeight] = useState(null);
+  const [width, setWidth] = useState("");
+  const [height, setHeight] = useState("");
 
   useEffect(() => {
     getDimensionOpts(); // Get both width and height dimensions options for filter dropdowns
@@ -43,10 +44,14 @@ export default function DimensionDropdown({fetchFilteredData}) {
   const handleDimensionChange = (event, dimensionType) => {
     if (dimensionType === "width") {
       setWidth(event.target.value);
-      fetchFilteredData(1, event.target.value, height);
+      let curHeight = height;
+      if (curHeight === "") curHeight = "*"
+      fetchFilteredData(1, event.target.value, curHeight);
     } else {
       setHeight(event.target.value);
-      fetchFilteredData(1, width, event.target.value);
+      let curWidth = width
+      if (curWidth === "") curWidth = "*"
+      fetchFilteredData(1, curWidth, event.target.value);
     }
   }
   return (
@@ -60,25 +65,29 @@ export default function DimensionDropdown({fetchFilteredData}) {
           value={width}
           onChange={e => handleDimensionChange(e, "width")}
         >
+          {/* Select Any Size */}
+          <MenuItem value="*">any</MenuItem>
           {dimensionOpts.widths && dimensionOpts.widths.map(width => (
             <MenuItem value={width} key={width}>{width}</MenuItem>
           ))}
         </Select>
+      </FormControl>
 
       {/* Height Filter Options */}
       <FormControl className={classes.formControl}>
         <InputLabel id="height-select-label">Height</InputLabel>
-          <Select
-            labelId="height-select-label"
-            id="height-select"
-            value={height}
-            onChange={e => handleDimensionChange(e, "height")}
-          >
-            {dimensionOpts.heights && dimensionOpts.heights.map(height => (
-              <MenuItem value={height} key={height}>{height}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Select
+          labelId="height-select-label"
+          id="height-select"
+          value={height}
+          onChange={e => handleDimensionChange(e, "height")}
+        >
+          {/* Select Any Size */}
+          <MenuItem value="*">any</MenuItem>
+          {dimensionOpts.heights && dimensionOpts.heights.map(height => (
+            <MenuItem value={height} key={height}>{height}</MenuItem>
+          ))}
+        </Select>
       </FormControl>
     </div>
   )
