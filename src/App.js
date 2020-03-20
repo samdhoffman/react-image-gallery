@@ -2,17 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 import axios from 'axios';
 
-import Grid from '@material-ui/core/Grid';
 import Pagination from '@material-ui/lab/Pagination';
-import Typography from '@material-ui/core/Typography';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import InvertColorsIcon from '@material-ui/icons/InvertColors';
 
 import Layout from './components/layout/Layout';
-import { MenuItem } from '@material-ui/core';
-import DimensionDropdown from './components/DimensionDropdown';
+import ControlPanel from './components/ControlPanel';
+import ImageGrid from './components/ImageGrid';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -30,12 +24,11 @@ function App() {
 
   useEffect(() => {
     fetchData(curPage); // Get images on page load
-  }, []);
+  }, [curPage]);
 
   // When user changes page this will set a new current page and make a GET request for the next page of data
   const handlePageChange = (event, value) => {
-    setCurPage(value);  
-    fetchData(value);
+    setCurPage(value);
   }
 
   // Load our image data here using page as a param for pagination
@@ -86,35 +79,17 @@ function App() {
   return (
     <div className="App">
       <Layout>
-        {/* Toggle Images to Grayscale */}
-        <Button
-          variant="contained"
-          color="default"
-          className="grayscale-btn"
-          startIcon={<InvertColorsIcon />}
-          onClick={toggleGrayscale}
-        >
-          Toggle Grayscale
-        </Button>
+        <ControlPanel fetchFilteredData={fetchFilteredData} toggleGrayscale={toggleGrayscale} />
 
         {isError && <div>Something went wrong ...</div>}
 
         {isLoading ? (
           <div>Loading ...</div>
         ) : (
-          <Grid container spacing={2} alignItems="center">
-            {images.map(img => (
-              // auto-layout being used for Grid item to make items equitably share available space
-              <Grid container item xs key={img.url} justify="center"> 
-                <img src={img.url} alt=""/>
-              </Grid>
-            ))}
-          </Grid>
+          <ImageGrid images={images} />
         )}
 
         <Pagination count={pages} page={curPage} onChange={handlePageChange} />
-        <DimensionDropdown fetchFilteredData={fetchFilteredData} />
-
       </Layout>
     </div>
   );
