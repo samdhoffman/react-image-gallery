@@ -7,6 +7,8 @@ import Pagination from '@material-ui/lab/Pagination';
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+import InvertColorsIcon from '@material-ui/icons/InvertColors';
 
 import Layout from './components/layout/Layout';
 import { MenuItem } from '@material-ui/core';
@@ -23,6 +25,9 @@ function App() {
   const [width, setWidth] = useState(300);
   const [height, setHeight] = useState(200);
   const [heightOpts, setHeightOpts] = useState([]);
+
+  // Grayscale State
+  const [isGrayscale, setIsGrayscale] = useState(false);
 
   // Loading & Errors
   const [isLoading, setIsLoading] = useState(false); // used for loading indicator
@@ -92,10 +97,34 @@ function App() {
       setIsError(true);
     }
   };
+
+  const toggleGrayscale = () => {
+    let imageDataCopy = [...images];
+    
+    if (isGrayscale) {
+      imageDataCopy.forEach(img => img.url = img.url.replace("?grayscale", ""));
+    } else {
+      imageDataCopy.forEach(img => img.url = img.url + "?grayscale");
+    }
+
+    setIsGrayscale(!isGrayscale)
+    setImages(imageDataCopy)
+  }
   
   return (
     <div className="App">
       <Layout>
+        {/* Toggle Images to Grayscale */}
+        <Button
+          variant="contained"
+          color="default"
+          className="grayscale-btn"
+          startIcon={<InvertColorsIcon />}
+          onClick={toggleGrayscale}
+        >
+          Toggle Grayscale
+        </Button>
+        
         {isError && <div>Something went wrong ...</div>}
 
         {isLoading ? (
