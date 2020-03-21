@@ -55,7 +55,7 @@ function App() {
     
     try {
       const result = await axios.get(`/images?page=${page}`); // get images data from our api
-      setTimeout(() => {
+      setTimeout(() => { // Using set timeout to allow the display of the loading indicator to give feedback to the user
         setImages(result.data.images);
         setPages(result.data.pages);
         setIsLoading(false);
