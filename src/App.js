@@ -116,7 +116,7 @@ function App() {
           <ImageGrid images={images} />
         )}
 
-        <Pagination className={classes.pagination} count={pages} page={curPage} onChange={handlePageChange} isDisabled={isError} />
+        <Pagination className={classes.pagination} count={pages} page={curPage} onChange={handlePageChange} disabled={isError} />
       </Layout>
     </div>
   );
