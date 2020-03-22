@@ -60,7 +60,7 @@ function App() {
     setIsError(false);
     setIsLoading(true);
 
-    let url = filterQuery != "" ? `/images/filter?${filter}&page=${page}` : `/images?page=${page}`;
+    let url = filterQuery !== "" ? `/images/filter?${filter}&page=${page}` : `/images?page=${page}`;
     
     try {
       const result = await axios.get(url); // get images data from our api
