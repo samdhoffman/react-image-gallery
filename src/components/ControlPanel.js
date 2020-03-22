@@ -10,14 +10,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ControlPanel({ fetchFilteredData, toggleGrayscale }) {
+export default function ControlPanel({ fetchFilteredData, toggleGrayscale, handleFilterChange }) {
   const classes = useStyles();
 
   return (
     <div>
       <Grid container className={classes.root} spacing={2} alignItems="center">
         <Grid item>
-          <DimensionDropdown fetchFilteredData={fetchFilteredData} />
+          <DimensionDropdown fetchFilteredData={fetchFilteredData} handleFilterChange={handleFilterChange} />
         </Grid>
         <Grid item>
           <GrayscaleToggle toggleGrayscale={toggleGrayscale} />

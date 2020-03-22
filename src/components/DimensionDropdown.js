@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function DimensionDropdown({fetchFilteredData}) {
+export default function DimensionDropdown({ handleFilterChange }) {
   const classes = useStyles();
 
   // Filtering
@@ -46,12 +46,12 @@ export default function DimensionDropdown({fetchFilteredData}) {
       setWidth(event.target.value);
       let curHeight = height;
       if (curHeight === "") curHeight = "*"
-      fetchFilteredData(1, event.target.value, curHeight);
+      handleFilterChange(event.target.value, curHeight);
     } else {
       setHeight(event.target.value);
-      let curWidth = width
-      if (curWidth === "") curWidth = "*"
-      fetchFilteredData(1, curWidth, event.target.value);
+      let curWidth = width;
+      if (curWidth === "") curWidth = "*";
+      handleFilterChange(curWidth, event.target.value);
     }
   }
   return (

@@ -31,6 +31,9 @@ function App() {
   const [pages, setPages] = useState(0);
   const [curPage, setCurPage] = useState(1);
 
+  // Filter Query State
+  const [filterQuery, setFilterQuery] = useState("");
+
   // Grayscale State
   const [isGrayscale, setIsGrayscale] = useState(false);
 
@@ -39,8 +42,10 @@ function App() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    fetchData(curPage); // Get images on page load
-  }, [curPage]); // Having curPage in the dependency array will ensure that fetchData is run every time the page changes
+    fetchData(curPage, filterQuery); // Get images on page load
+    // Having curPage and filterQuery in the dependency array below
+    // will ensure that fetchData is run every time the page or filterQuery changes
+  }, [curPage, filterQuery]); 
 
   // When user changes page this will set a new current page and make a GET request for the next page of data
   const handlePageChange = (event, value) => {
@@ -48,13 +53,14 @@ function App() {
   }
 
   // Load our image data here using page as a param for pagination
-  const fetchData = async (page) => {
+  const fetchData = async (page, filter) => {
     setIsError(false);
     setIsLoading(true);
 
+    let url = filterQuery != "" ? `/images/filter?${filter}&page=${page}` : `/images?page=${page}`;
     
     try {
-      const result = await axios.get(`/images?page=${page}`); // get images data from our api
+      const result = await axios.get(url); // get images data from our api
       setTimeout(() => { // Using set timeout to allow the display of the loading indicator to give feedback to the user
         setImages(result.data.images);
         setPages(result.data.pages);
@@ -66,23 +72,11 @@ function App() {
     }
   };
 
-  // Load our image data here using page as a param for pagination
-  const fetchFilteredData = async (page, widthOpt, heightOpt) => {
-    setIsError(false);
-    setIsLoading(true);
-
-    try {
-      const result = await axios.get(`/images/filter?width=${widthOpt}&height=${heightOpt}`); // pass width andheight as query params
-      setTimeout(() => {
-        setImages(result.data.images);
-        setPages(result.data.pages);
-        setIsLoading(false);
-      }, 1000)
-    } catch (error) {
-      setIsError(true);
-      setIsLoading(false);
-    }
-  };
+  const handleFilterChange = (width, height) => {
+    let queryString = `width=${width}&height=${height}`;
+    setFilterQuery(queryString);
+    setCurPage(1);
+  }
 
   const toggleGrayscale = () => {
     let imageDataCopy = [...images];
@@ -100,7 +94,7 @@ function App() {
   return (
     <div className="App">
       <Layout>
-        <ControlPanel fetchFilteredData={fetchFilteredData} toggleGrayscale={toggleGrayscale} />
+        <ControlPanel handleFilterChange={handleFilterChange} toggleGrayscale={toggleGrayscale} />
 
         {isError && <div>Something went wrong ...</div>}
 
