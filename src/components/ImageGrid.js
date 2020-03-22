@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import ImageModal from './ImageModal';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +24,14 @@ export default function ImageGrid({ images }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const [open, setOpen] = useState(false);
+  const [curImage, setCurImage] = useState({});
+
+  const handleModalOpen = (image) => {
+    setOpen(true);
+    setCurImage(image)
+  };
+
   return (
     <div className={classes.root}>
       {
@@ -39,12 +48,13 @@ export default function ImageGrid({ images }) {
         <GridList cellHeight={100} className={classes.gridList} cols={12}>
           {images.map(img => (
             <GridListTile key={img.url} cols={Math.ceil(img.width/100)} rows={Math.ceil(img.height/100)}>
-              <img src={img.url} alt="" />
+              <img src={img.url} alt="" onClick={() => handleModalOpen(img)} />
             </GridListTile>
           ))}
         </GridList>
       }
       
+      <ImageModal open={open} image={curImage} setOpen={setOpen} />
     </div>
   )
 }
