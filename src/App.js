@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
     "& ul": {
       justifyContent: 'center'
     }
+  },
+  "MuiGrid-root": {
+    height: "90%",
   }
 }));
 
@@ -99,7 +102,14 @@ function App() {
         {isError && <div>Something went wrong ...</div>}
 
         {isLoading ? (
-          <Grid container justify="center">
+          <Grid 
+            container 
+            justify="center"
+            alignItems="center"
+            classes={{
+              root: classes["MuiGrid-root"], // override base class styles
+            }}
+          >
             <CircularProgress />
           </Grid>
         ) : (
