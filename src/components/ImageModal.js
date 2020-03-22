@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   paper: {
-    position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #000',
