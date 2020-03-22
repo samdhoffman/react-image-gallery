@@ -18,12 +18,6 @@ const useStyles = makeStyles({
   title: {
     flexGrow: 1
   },
-  frontEndLinkWrapper: {
-    display: "flex",
-  },
-  backEndLinkWrapper: {
-    display: "flex",
-  },
   githubLink: {
     textDecoration: "none",
     '&:visited': {
