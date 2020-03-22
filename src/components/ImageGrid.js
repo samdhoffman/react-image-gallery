@@ -10,7 +10,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'space-around',
-    height: "90%",
     overflow: 'hidden',
   },
   gridList: {
