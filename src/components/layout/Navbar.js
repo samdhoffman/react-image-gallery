@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Tooltip from '@material-ui/core/Tooltip';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles({
@@ -47,9 +48,11 @@ const Navbar = () => {
             Image Gallery
           </Typography>
 
-          <Button className={classes.frontEndLinkWrapper} color="inherit" onClick={handleClick}>
-              <GitHubIcon/>
-          </Button>
+          <Tooltip title="View The Codebase">
+            <Button className={classes.frontEndLinkWrapper} color="inherit" onClick={handleClick}>
+                <GitHubIcon/>
+            </Button>
+          </Tooltip>
           
           <Menu
             id="simple-menu"
