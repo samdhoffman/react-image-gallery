@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function DimensionDropdown({ handleFilterChange }) {
+export default function DimensionDropdown({ handleFilterChange, isDisabled }) {
   const classes = useStyles();
 
   // Filtering
@@ -57,7 +57,7 @@ export default function DimensionDropdown({ handleFilterChange }) {
   return (
     <div className={classes.root}>
       {/* Width Filter Options */}
-      <FormControl className={classes.formControl}>
+      <FormControl className={classes.formControl} disabled={isDisabled} >
         <InputLabel id="width-select-label">Width</InputLabel>
         <Select
           labelId="width-select-label"
@@ -74,7 +74,7 @@ export default function DimensionDropdown({ handleFilterChange }) {
       </FormControl>
 
       {/* Height Filter Options */}
-      <FormControl className={classes.formControl}>
+      <FormControl className={classes.formControl} disabled={isDisabled}>
         <InputLabel id="height-select-label">Height</InputLabel>
         <Select
           labelId="height-select-label"

@@ -9,6 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Layout from './components/layout/Layout';
 import ControlPanel from './components/ControlPanel';
 import ImageGrid from './components/ImageGrid';
+import ErrorPage from './components/ErrorPage';
 
 const useStyles = makeStyles(theme => ({
   pagination: {
@@ -96,9 +97,9 @@ function App() {
   return (
     <div className="App">
       <Layout>
-        <ControlPanel handleFilterChange={handleFilterChange} toggleGrayscale={toggleGrayscale} />
+        <ControlPanel isDisabled={isError} handleFilterChange={handleFilterChange} toggleGrayscale={toggleGrayscale} />
 
-        {isError && <div>Something went wrong ...</div>}
+        {isError && <ErrorPage />}
 
         {isLoading ? (
           <Grid 
@@ -115,7 +116,7 @@ function App() {
           <ImageGrid images={images} />
         )}
 
-        <Pagination className={classes.pagination} count={pages} page={curPage} onChange={handlePageChange} />
+        <Pagination className={classes.pagination} count={pages} page={curPage} onChange={handlePageChange} isDisabled={isError} />
       </Layout>
     </div>
   );
