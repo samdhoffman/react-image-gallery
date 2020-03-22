@@ -40,7 +40,7 @@ export default function ImageGrid({ images }) {
           {images.map(img => (
             // auto-layout being used for Grid item to make items equitably share available space
             <Grid container item xs key={img.url} justify="center"> 
-              <img src={img.url} alt=""/>
+              <img src={img.url} alt="" onClick={() => handleModalOpen(img)} />
             </Grid>
           ))}
         </Grid>
