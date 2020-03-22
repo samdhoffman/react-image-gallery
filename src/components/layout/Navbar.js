@@ -31,7 +31,7 @@ const Navbar = () => {
             Image Gallery
           </Typography>
           <Button color="inherit">
-            <a className={classes.githubLink} href="https://github.com/samdhoffman/react-image-gallery" target="_blank">
+            <a className={classes.githubLink} href="https://github.com/samdhoffman/react-image-gallery" target="_blank" rel="noopener noreferrer" >
               <GitHubIcon/>
             </a>
           </Button>
