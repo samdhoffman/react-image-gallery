@@ -104,7 +104,7 @@ function App() {
 
         {isError && <ErrorPage errorResponse={errorResponse} />}
         
-        {(!isError && images.length === 0) && <NoResults />}
+        {(!isLoading && !isError && images.length === 0) && <NoResults />}
 
         {isLoading ? (
           <Grid 
