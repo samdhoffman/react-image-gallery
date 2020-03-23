@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import ImageModal from './ImageModal';
+import NoResults from './NoResults';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,6 +37,11 @@ export default function ImageGrid({ images }) {
 
   return (
     <div className={classes.root}>
+      {
+        images.length === 0
+        ?
+        <NoResults />
+        :
         <Grid container spacing={2} alignItems="center">
           {images.map(img => (
             // auto-layout being used for Grid item to make items equitably share available space
@@ -49,6 +55,7 @@ export default function ImageGrid({ images }) {
             </Grid>
           ))}
         </Grid>
+      }
       
       <ImageModal open={open} image={curImage} setOpen={setOpen} />
     </div>
