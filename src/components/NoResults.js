@@ -28,7 +28,7 @@ export default function NoResults() {
   return (
     <div className={classes.root}>
       <section className="photoContainer">
-        <img className={classes.drReadingImg} src={doctor_reading} />
+        <img className={classes.drReadingImg} src={doctor_reading} alt="No matching images" />
       </section>
       <section>
         <h2>Your Results Came Back Negative</h2>
