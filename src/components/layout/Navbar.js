@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
+import Link from '@material-ui/core/Link';
 import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles({
@@ -45,7 +46,7 @@ const Navbar = () => {
       <AppBar position="static" color="inherit" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Image Gallery
+            <Link href="/" color="inherit" underline="none">Image Gallery</Link>
           </Typography>
 
           <Tooltip title="View The Codebase">
