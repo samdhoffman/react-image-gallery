@@ -44,6 +44,7 @@ function App() {
   // Loading & Errors
   const [isLoading, setIsLoading] = useState(false); // used for loading indicator
   const [isError, setIsError] = useState(false);
+  const [errorResponse, setErrorResponse] = useState({});
 
   useEffect(() => {
     fetchData(curPage, filterQuery); // Get images on page load
@@ -71,6 +72,7 @@ function App() {
         setIsLoading(false);
       }, 1000)
     } catch (error) {
+      setErrorResponse(error.response)
       setIsError(true);
       setIsLoading(false)
     }
@@ -100,7 +102,7 @@ function App() {
       <Layout>
         <ControlPanel isDisabled={isError} handleFilterChange={handleFilterChange} toggleGrayscale={toggleGrayscale} />
 
-        {isError && <ErrorPage />}
+        {isError && <ErrorPage errorResponse={errorResponse} />}
         
         {(!isError && images.length === 0) && <NoResults />}
 
