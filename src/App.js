@@ -10,6 +10,7 @@ import Layout from './components/layout/Layout';
 import ControlPanel from './components/ControlPanel';
 import ImageGrid from './components/ImageGrid';
 import ErrorPage from './components/ErrorPage';
+import NoResults from './components/NoResults';
 
 const useStyles = makeStyles(theme => ({
   pagination: {
@@ -100,6 +101,8 @@ function App() {
         <ControlPanel isDisabled={isError} handleFilterChange={handleFilterChange} toggleGrayscale={toggleGrayscale} />
 
         {isError && <ErrorPage />}
+        
+        {(!isError && images.length === 0) && <NoResults />}
 
         {isLoading ? (
           <Grid 
