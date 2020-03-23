@@ -50,8 +50,8 @@ export default function ImageModal({ open, image, setOpen }) {
           <div className={classes.paper}>
             <img src={image.url} alt="" />
             <section style={{width: image.width}}>
-              <p>Width: {image.width}</p>
-              <p>Height: {image.height}</p>
+              <p>Width: {image.width}px</p>
+              <p>Height: {image.height}px</p>
             </section>
           </div>
         </Fade>
