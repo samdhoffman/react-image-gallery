@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import ImageModal from './ImageModal';
-import NoResults from './NoResults';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,25 +36,19 @@ export default function ImageGrid({ images }) {
 
   return (
     <div className={classes.root}>
-      {
-        images.length === 0
-        ?
-        <NoResults />
-        :
-        <Grid container spacing={2} alignItems="center">
-          {images.map(img => (
-            // auto-layout being used for Grid item to make items equitably share available space
-            <Grid container item xs key={img.url} justify="center"> 
-              <div className={classes.imgContainer} >
-                <img src={img.url} alt=""/>
-                <IconButton aria-label={`info about ${img.url}`} className={classes.infoIcon} onClick={() => handleModalOpen(img)}>
-                  <InfoIcon />
-                </IconButton>
-              </div>
-            </Grid>
-          ))}
-        </Grid>
-      }
+      <Grid container spacing={2} alignItems="center">
+        {images.map(img => (
+          // auto-layout being used for Grid item to make items equitably share available space
+          <Grid container item xs key={img.url} justify="center"> 
+            <div className={classes.imgContainer} >
+              <img src={img.url} alt=""/>
+              <IconButton aria-label={`info about ${img.url}`} className={classes.infoIcon} onClick={() => handleModalOpen(img)}>
+                <InfoIcon />
+              </IconButton>
+            </div>
+          </Grid>
+        ))}
+      </Grid>   
       
       <ImageModal open={open} image={curImage} setOpen={setOpen} />
     </div>
