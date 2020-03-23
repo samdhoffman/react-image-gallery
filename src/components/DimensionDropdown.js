@@ -66,7 +66,7 @@ export default function DimensionDropdown({ handleFilterChange, isDisabled }) {
           onChange={e => handleDimensionChange(e, "width")}
         >
           {/* Select Any Size */}
-          <MenuItem value="*">any</MenuItem>
+          <MenuItem value="*">Any</MenuItem>
           {dimensionOpts.widths && dimensionOpts.widths.map(width => (
             <MenuItem value={width} key={width}>{width}</MenuItem>
           ))}
@@ -83,7 +83,7 @@ export default function DimensionDropdown({ handleFilterChange, isDisabled }) {
           onChange={e => handleDimensionChange(e, "height")}
         >
           {/* Select Any Size */}
-          <MenuItem value="*">any</MenuItem>
+          <MenuItem value="*">Any</MenuItem>
           {dimensionOpts.heights && dimensionOpts.heights.map(height => (
             <MenuItem value={height} key={height}>{height}</MenuItem>
           ))}
