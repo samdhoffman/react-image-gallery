@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Project Outline
 
-The goal of this project is to reate a local photo gallery web application from a csv file containing a list of image URLs.
+The goal of this project is to create a local photo gallery web application from a csv file containing a list of image URLs.
 
 This project has a complementary back end API built with Flask that can be found at https://github.com/samdhoffman/flask_image_gallery.
 
