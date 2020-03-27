@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    // width: 300
   },
   formControl: {
     margin: theme.spacing(1),
